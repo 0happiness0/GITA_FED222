@@ -1,2 +1,94 @@
 @charset "utf-8";
 /* 도깨비 메인 페이지 미디어쿼리 - media.css */
+
+/**************** 1070px 이하 미디어쿼리 시작 ****************/
+@media screen and (max-width:1024px) {
+  html{
+    font-size: 8px;
+  }
+  .top{
+    height: 120px;
+  }
+  .gnb ul{
+    width: 495px;
+  }
+  .tmenu > ul > li > a {
+    line-height: 1;
+  }
+  /* 개별서브메누 오버시, 가상요소 서브배경 오버시 */
+  /* 첫번째메뉴 - 3개 */
+.gnb > ul > li:nth-child(1):hover .smenu, 
+.gnb > ul > li.m1:hover::after {
+  height: 96px;
+  /* 32*3 */
+}
+
+/* 세번째메뉴 - 4개 */
+.gnb > ul > li:nth-child(3):hover .smenu,
+.gnb > ul > li.m2:hover::after {
+  height: 128px;
+  /* 32*4 */
+}
+
+/* 네번째메뉴 - 2개 */
+.gnb>ul>li:nth-child(4):hover .smenu,
+.gnb > ul > li.m3:hover::after {
+  height: 64px;
+ /* 32*2 */
+}
+/* 하단링크 */ 
+.blink > ul{
+  width: 680px;
+}
+.info{
+  height: auto; /* 높이값 자동전환 */
+  padding-bottom: 15px;
+}
+.brand{
+  display: none;
+}
+
+}
+/**************** 1070px 이하 미디어쿼리 끝 ****************/
+
+
+/*************** 800px 이하 미디어쿼리 시작 ****************/
+@media screen and (max-width:800px) {
+  /* 숨기기 */
+  /* GNB메뉴, 서브메뉴, 서브메뉴배경 가상요소, 문구이미지, 하단링크 */
+  .gnb, .tmenu, #dtxt, .blink{
+    display: none;
+  }
+  .top, .cont{
+    height: auto;
+  }
+  .ham{
+    display: block;
+  }
+  .cat{
+    width: 99%;
+  }
+  .cont{
+    padding: 30px 0;
+  }
+  /* 캐릭터박스 오버시 이미지박스 서로 안겹치게 */
+  .cat:hover .ci{
+    margin-top: 0;
+  }
+  .cd h3{
+    font-size: 3rem;
+    padding: 1.5rem 2rem;
+  }
+  .cd p{
+    padding: 1.7rem;
+    font-size: 2rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .addr address{
+    font-size: 1.7rem;
+    padding: 1.1rem;
+  }
+}
+
+/**************** 1024px 이하 미디어쿼리 끝 ****************/

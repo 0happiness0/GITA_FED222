@@ -2,6 +2,10 @@
 /* 도깨비 초기화 css - reset.css */
 /* 요소의 기본세팅 초기화 */
 
+html{
+  font-size: 10px; /* rem단위 계산 편이를 위해 10px로 세팅 */
+}
+
 html,body,h1,h2,h3,h4,h5,h6,ul,ol,dl,dt,dd{
   margin: 0;
   padding: 0;
