@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* 도깨비 공통클래스 css - core.css */
+/* 공통클래스, 웹폰트 등 구현 */
+
+/* cdn 웹폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Serif+KR&display=swap');
+/* 
+타이틀: font-family: 'Nanum Gothic', sans-serif;
+내용: font-family: 'Noto Serif KR', serif;
+
+*/
+
+/* 스크롤바 디자인 */
+/* -webkit- 벤더사명(크롬, 사파리) 접두어 
+  (참고: -ms-익스플로어, -o-(오페라), -moz-(사파이어폭스)*/
+  .scbar::-webkit-scrollbar{
+    /* 전체 스크롤바 크기 변경 */
+    width: 7px;
+  }
+  .scbar::-webkit-scrollbar-thumb{
+    /* 스크롤바 */
+    background-color: #666;
+   border-radius: 5px; 
+  }
+  .scbar::-webkit-scrollbar-track{
+    /* 스크롤바 트랙 */
+    background-color: #ddd;
+   border-radius: 5px; 
+  }
+
+.inbox{
+  /* 가로크기를 고정하면 작은화면에선 가로스크롤이 생김
+  max-width는 지정해준 최대가로크기를 사용하고 크기가 작을 때 auto로 전환됨
+   */
+   max-width: 1200px;/* 1200px 최대크기를 유지하다가(더 이상 커지지 않음) 이것보다 작아지면 기본설정인 auto로 화면에 붙어서 크기가 유동적으로 변함 */
+  margin: 0 auto;
+}
+
+/* 가상요소로 float해제 가상클래스(.clb 넣어주면 자동으로 따라옴) */
+.clb::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* IR(Image Replacement) 배경이미지 설명 숨기기 클래스
+  IR기법 주의사항: display:none 사용금지(display:none은 리더기가 읽지 못함*/
+.ir{
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}

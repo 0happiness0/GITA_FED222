@@ -1,0 +1,248 @@
+@charset "utf-8";
+/* 도깨비 공통 디자인 css - common.css */
+/* 상단, 하단영역 등 공통디자인 */
+/* 공동 글씨체 : 나눔고딕 */
+body{
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+
+/***************** 1. 상단영역 ****************/
+#top{ /* 겉박스 */
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+.top{ /* 속박스 */
+  height: 127px;
+}
+/* 메인로고 */
+#logo{
+  padding: 20px;
+  text-align: center;
+}
+#logo img{
+  width: 100px;
+  /* a요소나 div등으로 이미지를 감싸면 하단에 4px공백이 생기는데 vertical-aling 값(top, middle, bottom 상관없음)을 설정하면 없어짐 */
+  vertical-align: middle;
+}
+/* 로그인, 회원가입 */
+.tmenu{
+  position: relative;
+}
+.tmenu ul{
+  position: absolute;
+  top: -40px;
+  right: 0;
+}
+.tmenu li{
+  float: left;
+}
+.tmenu > ul > li{
+  padding: 0 5px;
+}
+.tmenu > ul > li > a{
+  font-size: 15px;
+  color: #000;
+  text-decoration: none;
+}
+/* sns메뉴  */
+.sns{
+  margin-top: -5px;
+}
+.sns a{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sns li{
+  width: 30px;
+  height: 30px;
+  background: url(../images/icons.png) no-repeat;
+}
+.sns li:first-child{
+  background-position: 0 0;
+}
+.sns li:first-child:hover{
+  background-position: 0 -30px;
+}
+.sns li:nth-child(2){
+  background-position: -30px 0;
+}
+.sns li:nth-child(2):hover{
+  background-position: -30px -30px;
+}
+.sns li:last-child{
+  background-position: -60px -30px;
+}
+.sns li:last-child:hover{
+  background-position: -60px -30px;
+}
+
+/* GNB메뉴 */
+.gnb ul{
+  width: 574px;
+  margin: 0 auto;
+}
+.gnb ul::after{ /* 자식요소에 float를 주면 부모에 overflow:hidden보다 가상요소로 clear:both를 주는게 훨씬 안정적이고 좋음 */
+  content: '';
+  display: block;
+  clear: both;
+}
+.gnb > ul > li{
+  float: left;
+  height: 44px;
+  padding: 0 15px;
+}
+/* li 가상요소로 서브메뉴 꽉차는 배경 만들기
+::after를 쓰는 이유는 a요소 다음 위치를 absolute로 하기 위해
+::before를 쓰면 a요소를 가려버림 */
+.gnb > ul > li.bgbx::after{
+  content: '';
+  display: block;
+  position: absolute; /* 부모요소에 relative를 안줬기 때문에 보이는 화면이 부모자격 */
+  left: 0; /* left:0 안주면 .gnb > ul쪽으로 시작점에 붙음 */
+  width: 100%;
+  height: 0;
+  background-color: #fff;
+  margin-top: 4px;
+  transition: height .3s ease-out;
+}
+/* 첫번째 li에 마우스 오버시 가상요소배경 보이기 */
+.gnb > ul > li.bgbx:hover::after{  /* li:nth-child만 줄 수 있는게 아니라 클래스를 줘서 공통으로 css를 줄 수 있음 */
+  border-bottom: 2px solid red;
+}
+/* 첫번째 li:hover시 가상요소배경 보이기 */
+.gnb > ul > li.m1:hover::after{ 
+  height: 120px;
+}
+.gnb > ul > li.m2:hover::after{ 
+  height: 160px;
+}
+.gnb > ul > li.m3:hover::after{ 
+  height: 80px;
+}
+
+
+/* 서브메뉴로 인한 가로크기가 늘어남으로 글자크기만큼만 강제로 가로크기를 지정하지만 서브메뉴가 absolute면 강제로 늘릴 필요가 없음 absolute는 부모에게 영향을 주지 않는다  */
+/* .gnb > ul> li:nth-child(3),
+.gnb > ul> li:nth-child(4){ 
+  width: 51px;
+} */
+
+.gnb > ul> li > a{
+  /* display: block;
+  width: 200px; */
+  /* text-align: center; */
+  text-decoration: none;
+  line-height: 44px;
+  color: #000;
+  font-size: 17px;
+}
+.gnb > ul > li:hover > a{
+  border-bottom: 4px solid red;
+  padding-bottom: 12px; /* 인라인 요소의 위,아래 방향 패딩과 보더는 다른요소에 영향을 미치지 않고 디자인만 적용됨 */
+}
+
+/* 서브메뉴 */
+.smenu{
+  position: absolute; /* li박스안에 그대로 있고 위에 있는 형제 a요소도 그 아래 그대로 위치하고 있다 */
+  width: 88px;
+  white-space: nowrap; /* 글자가 밑으로 떨어지지 않음 */
+  /* 서브메뉴 숨김장치
+  - 높이값:0 + 넘치는 자식요소 숨기기 overflow:hidden
+  주의) 패딩값 있으면 안됨 */
+  height: 0;
+  overflow: hidden;
+  background-color: #fff;
+  margin-top: 4px;
+  transition: height .3s ease-out;
+  z-index: 1; /* 배경가상요소보다 위 */
+}
+/* 상위메뉴 li(height: 40px)에 마우스 오버시 하위메뉴박스 높이값 복원 */
+/* 첫번째(3개), 세번째(4개), 네번째(2개) 메뉴 */
+.gnb > ul > li:nth-child(1):hover .smenu{
+  height: 120px;
+}
+.gnb > ul> li:nth-child(3):hover .smenu{
+  height: 160px;
+}
+.gnb > ul> li:nth-child(4):hover .smenu{
+  height: 80px;
+}
+/* .smenu > ol{
+  .smenu박스는 높이값을 0으로 자식요소를 숨겨야는데 패딩을 주면 높이값이 0이어도 패딩때문에 숨겨지지 않음 그래서 안쪽박스에 패딩값을 줘야함
+  padding: 10px; 
+} */
+.smenu a{
+  display: block;
+  color: #000;
+  font-size: 14px;
+  line-height: 40px;
+  transition: .3s;
+}
+/* .smenu a:hover{
+  background-color: pink;
+} */
+
+/***************** 2. 메인영역 ****************/
+.cont{
+  height: 800px;
+}
+
+/***************** 3. 하단영역 ****************/
+#info{
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.info{
+  height: 241px;
+}
+.blink{
+  padding-top: 5px;
+}
+.blink ul{
+  width: 805px;
+  margin: 0 auto; /* 가로크기가 있어야만 적용되며 부모 가로크기보다 작아야함 */
+}
+.blink li{
+  float: left;
+  padding: 0 15px;
+}
+.blink li a{
+  color: #222;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 2.8;
+  text-decoration: none;
+}
+.blink li a:hover{
+  color: red;
+  text-decoration: underline;
+}
+/* 브랜드 바로가기 */
+.brand select{
+  position: absolute;
+  top: -37px;
+  right: 0;
+  font-weight: bold;
+  font-style: 14px;
+  line-height: 2.8;
+  padding: 5px;
+}
+/* 회사주소박스 */
+.addr{
+  padding: 10px;
+}
+.addr address{
+  max-width: 804px;
+  margin: 0 auto;
+  border: 4px double #000; /* double은 4px이상이어야 보임 */
+  font-size: 14px;
+  line-height: 2;
+  text-align: center;
+  font-style: normal;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.blogo{
+  text-align: center;
+}

@@ -1,0 +1,169 @@
+@charset "utf-8";
+/* 도깨비 메인 페이지 css - main.css */
+
+/* 공통사용 외부css 파일 합치기 */
+@import url(reset.css);
+@import url(core.css);
+@import url(common.css);
+
+body *{
+  outline: 1px dashed gray;
+}
+/*
+ 별(*)선택자는 모든 요소를 선택함
+ outline속성은 border와 달리 박스모델의 구성속성이 아님
+ border와 달리 outline은 크기를 차지하지 않고 외곽선으로만 표시
+ outline: 두께 종류 색상;
+*/
+
+/* 컨텐츠 영역 최상위 부모 */
+body{
+  background: 
+  url(../images/bg_logo_a_01.png) no-repeat fixed 10% 30%/10%,
+  url(../images/bg_mainvisual.jpg) no-repeat fixed center/cover;
+  
+}
+
+/************* 2. 메인영역 **************/
+.cont{
+  padding-top: 400px;
+  /* 기본height크기는 800px로 설정되어 있는 상태(컨텐츠영역 높이) :
+  height값을 800px로 유지하고 싶으면 height값을 400px로 변경해서 패딩+보더 값(400px)을 더해 800px을 맞추던가 box-sizing:border-box로 설정하여 보더와 패딩이 지정한 크기 내부에 포함되도록 한다. 
+  */
+  box-sizing: border-box; /* 기본값 */
+  max-width: none; /* .inbox의 max-width 값 해제 */
+}
+
+#cbx{
+  width: 90%;
+  /* height: 300px; */
+  margin: 0 auto;
+  /* float된 자식의 높이값 인식을 위해 overflow:hidden 적용 */
+  /* overflow: hidden;  여기서는 안쓰고 가상요소에 clear:both를 사용할 것임 */
+}
+
+/* 가상요소로 clear 설정 */
+#cbx::after{
+  content: '';
+  display: block; 
+  clear: both;  /* block요소에만 적용되므로 display:block을 꼭 써줘야함 */
+}
+/* 캐릭터박스 공통 */
+.cat{
+  width: 24%;
+  margin: 0 .5%;
+  /* 
+    [ 블록요소를 옆으로 흘러가게 하기 ]
+    float속성
+    - left: 박스들이 왼쪽으로 한줄 정렬
+    - right: 박스들이 오른쪽으로 한줄 정렬
+
+    [ 자식요소가 float된 경우 부모요소의 높이값은? ]
+    -> 자식요소가 float됨으로 부모 높이값이 0으로 변하게 됨
+    해결방법:
+    1. 부모요소에 overflow:hidden 설정
+    2. float 적용한 부모요소에 가상요소인 ::before나 ::after에 clear설정(권장)
+  */
+  float: left;
+}
+
+.ci > img{
+  width: 100%; /* 이미지 크기를 부모박스(.ci)에 맞추기 */
+}
+
+/* 캐릭터 이미지 박스 */
+.ci span{
+  display: block;
+  text-align: center;
+  margin-top: -16%;
+}
+.ci{
+  transition: .4s;
+}
+/* 캐릭터박스(.cat)에 마우스 오버시 이미지박스(.ci) 위로 이동 */
+.cat:hover .ci{
+  margin-top: -100px;
+}
+/* 이름 이미지 사이즈 조정 */
+.ci span img{
+  width: 32%;
+}
+
+/* 이름이미지 중 첫번째 진한 이미지 숨기기 */
+/* 가상클래스로 첫번째 이미지 선택 */
+.ci span img:first-child{
+  display: none;
+}
+
+/* 마우스 오버시 첫번째 이름이미지 보이게 하기 */
+/* 마우스 오버시 가상클래스 :hover */
+.cat:hover .ci span img:first-child{
+  display: inline;
+}
+/* .cat에 마우스 오버시 마지막 이름이미지 숨기기 */
+.cat:hover .ci span img:last-child{
+  display: none;
+}
+
+/* 캐릭터 설명박스 */
+.cd{
+  height: 0;
+  background: url(../images/eachBG.jpg) no-repeat center/cover;
+  overflow-y: scroll;
+  margin-top: 15px;
+  border-radius: 20px 5px 5px 20px;
+  transition: height .4s ease-out;
+  /* height .5s ease-in-out 1s,
+  background-color 1s ease-in-out 1.4s; */
+  /* 트랜지션:
+    속성값의 변화과정을 보여주면서 애니메이션을 줌
+    transition: 속성 시간 속도 지연
+    1. 속성: 변경 애니메이션 대상 속성(속성을 안쓰면 기본값 all이 들어가 모두 적용됨)
+    2. 시간: 애니메이션 시간 - 초단위(s)
+    3. 가속도: 1) ease: 앞,뒤로 약간씩 느려짐(기본값)
+              2) ease-in: 애니 처음에 서서히 빨라짐
+              3) ease-out: 애니끝에 서서히 느려짐
+              4) ease-in-out: 애니 시작과 끝에 천천히
+              5) linear: 등속도 - 베이지곡선으로 매우 다채롭게 가속도 조정 가능
+    4. 지연: 애니 시작전 대기시간(초단위: s)   
+    5. 적용법: 오버시와 원상복귀되는 애니가 똑같다면 오버 전 원본에 한번만 주면 동일하게 적용됨. 만약 오버시와 아웃시가 달라야 한다면 각각 트랜지션을 설정       
+  */
+}
+/* 캐릭터 박스(.cat)에 마우스 오버시 설명박스(.cd) 보이기 */
+.cat:hover .cd{
+  height: 250px;
+}
+/* 캐릭터 설명 */
+.cd h3{
+  font-family: 'Noto Serif KR', serif;
+  padding: 5px 10px 0;
+}
+/* 가상 요소로 타이틀 앞에 작은 도깨비 로고 */
+.cd h3::before{
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 30px;
+  vertical-align: -8px;
+  margin-right: 5px;
+  background: url(../images/bg_logo_a_01.png) no-repeat right -183px;
+}
+
+.cd p{
+  font-family: 'Nanum Gothic', sans-serif;
+  padding: 5px 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: justify;  /* 글씨 양쪽 정렬 */
+}
+
+/* 캐릭터 설명 첫번째 p요소의 첫글자 가상요소로 디자인 변경 */
+.cd p:first-of-type::first-letter{
+  font-size: 25px;
+  color: lightcoral;
+  font-weight: bold;
+  /* blur없이 그림자 4개로 테두리 주는 법 */
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000;
+}
+
+/************* 3. 하단영역 **************/

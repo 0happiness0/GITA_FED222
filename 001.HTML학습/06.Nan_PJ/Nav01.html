@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>유형1. 가로네비 서브별 드롭다운 세로형</title>
+  <style>
+    html, body, ul, ol, a{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+    }
+    .gnb{
+      background-color: #4892fa;
+    }
+    .gnb ul /* .gnb ol */{
+      width: 800px;
+      margin: 0 auto;
+    }
+    .gnb ul::after{ /* 자식요소에 float를 주면 부모에 overflow:hidden보다 가상요소로 clear:both를 주는게 훨씬 안정적이고 좋음 */
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .gnb > ul > li{
+      float: left;
+      height: 50px;
+    }
+    .gnb > ul> li > a{
+      display: block;
+      width: 200px;
+      text-align: center;
+      line-height: 50px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 17px;
+      transition: all .3s;
+    }
+    .gnb > ul > li:hover > a{
+      background-color: rgb(203, 226, 255);
+      color: rgb(20, 72, 193);
+    }
+    .smenu{
+      /* 서브메뉴 숨김장치
+      - 높이값:0 + 넘치는 자식요소 숨기기 overflow:hidden
+      주의) 패딩값 있으면 안됨 */
+      height: 0;
+      overflow: hidden;
+      background-color: rgb(203, 226, 255);
+      transition: height .3s ease-out;
+    }
+    /* 상위메뉴 li에 마우스 오버시 하위메뉴박스 높이갑사 복원 */
+    /* 두번재 메뉴 */
+    .gnb > ul > li:nth-child(2):hover .smenu{
+      height: 180px;
+    }
+    /* 세번째 메뉴 */
+    .gnb > ul> li:nth-child(3):hover .smenu{
+      height: 100px;
+    }
+    .smenu > ol{
+      /* .smenu박스는 높이값을 0으로 자식요소를 숨겨야는데 패딩을 주면 높이값이 0이어도 패딩때문에 숨겨지지 않음 그래서 안쪽박스에 패딩값을 줘야함*/
+      padding: 10px; 
+    }
+    .smenu a{
+      display: block;
+      color: #000;
+      font-size: 14px;
+      line-height: 40px;
+      text-align: center;
+      transition: .3s;
+    }
+    .smenu a:hover{
+      background-color: pink;
+    }
+
+    /* 본문내용 */
+    .cont{
+      background-color: rgb(233, 245, 255);
+      text-align: center;
+      line-height: 30;
+    }
+    
+
+
+  </style>
+</head>
+<body>
+  <h1>유형1. 가로네비 서브별 드롭다운 세로형</h1>
+  <!-- GNB 네비게이션 -->
+  <nav class="gnb">
+    <ul>
+      <li>
+        <a href="#none">Home</a>
+      </li>
+      <li>
+        <a href="#none">웹개발</a>
+        <!-- 서브메뉴 -->
+        <div class="smenu">
+          <ol>
+            <li>
+              <a href="">웹디자인</a>
+            </li>
+            <li>
+              <a href="">HTML5+CSS3</a>
+            </li>
+            <li>
+              <a href="">jQuery</a>
+            </li>
+            <li>
+              <a href="">웹+모바일</a>
+            </li>
+          </ol>
+        </div>
+      </li>
+      <li>
+        <a href="#none">게시판</a>
+        <!-- 서브메뉴 -->
+        <div class="smenu">
+          <ol>
+            <li>
+              <!-- HTML 특수문자(엔퍼센드)
+                - & : &amp;
+                - 2. < : &lt;
+                - 3. > : &gt;
+              -->
+              <a href="">Q&amp;A</a> 
+              
+            </li>
+            <li>
+              <a href="">HTML5+CSS3</a>
+            </li>
+          </ol>
+        </div>
+      </li>
+      <li>
+        <a href="#none">프로필</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- 내용박스 -->
+  <div class="cont">
+    본문내용
+  </div>
+</body>
+</html>

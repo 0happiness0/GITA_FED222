@@ -1,0 +1,558 @@
+@charset "utf-8";
+/* Robot PJ CSS -robot.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron&display=swap');
+/* 
+    font-family: 'Black Ops One', cursive;
+    font-family: 'Orbitron', sans-serif; 
+*/ 
+html{
+  scroll-behavior: smooth;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background: url(../images/bg.jpg) no-repeat fixed top/cover;
+}
+
+/* 공사중 표시 */
+/* body *{
+  outline: 2px dashed lime;
+} */
+
+/* [ calc ]
+  포지션이 absolute혹은 fixed일 때 기준에 따른 정중앙 정렬법
+  1. top과 left를 50%로 밀고 자기크기의 절반만큼 빼기
+  예) calc(50% - 특정px)
+  - calc()메서드는 css전용 계산 메서드
+  > 사칙연산이 모두 가능함 (#logo에선 유동적인 %에서 특정 px를 뺌)
+  > 주의: 마이너스 기호 앞뒤로 반드시 띄어쓰기!
+  
+  2. top과 left를 50%로 밀고 자기크기의 절반만큼 이동하기
+  -> transform: translate(-50%, -50%)
+  -> -50%는 자기자신의 가로/세로 크기의 절반만큼 반대방향으로 이동함
+
+  참고사이트: https://www.dothome.co.kr/web/free/index.php
+
+*/
+
+h1#logo{
+  position: fixed; /* 부모는 보이는 화면(window) */
+  /* 중앙배치 방법1
+  top: calc(50% - 102px);
+  left: calc(50% - 102px); */
+
+  /* 중앙배치 방법2 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2);
+  /* transform: scale(2);  transform을 각각 쓰면 모양이 망가지므로 한번에 여러개 써줘야 함  */
+  width: 200px;
+  height: 200px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  margin: 0;
+  text-align: center;
+  color: #00ffae;
+  text-shadow: 2px 2px 5px #000;
+  box-shadow: 0 0 20px 5px pink,
+  inset 0 0 20px 5px #000;
+  /* font: 스타일 두께 크기/줄간격 글자체 */
+  font: bold 45px/200px 'Orbitron';
+  background: pink url(../images/robot_03.png) no-repeat;
+  background-position: center 10px;
+  background-size: 160px;
+  animation: logoAni 2s ease-in-out 2s forwards, logoAni2 1s ease-in-out 4s infinite  alternate;
+}
+
+/* 로고 애니 키프레임 */
+@keyframes logoAni{
+  /* from{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+  }  위에 초기설정과 같기 때문에 안써줘도 애니메이션 작동함 */
+  80%{
+    top: 50px;
+    left: 50px;
+    transform: scale(1) rotate(0deg);
+  }
+  100%{
+    top: 50px;
+    left: 50px;
+    transform: scale(1) rotate(20deg);
+  }
+}
+
+@keyframes logoAni2{
+  0%{
+    transform: rotate(20deg);
+  }
+  100%{
+    transform: rotate(-20deg);
+  }
+}
+
+/************************************************ 
+  [ CSS로 애니메이션 ]
+  - 시간에 따라 CSS설정이 ㅇ변경되어 애니메이션 하도록 키프레임 설정하고 이것을 호출함으로 의도된 연출을 구현하는 것
+
+  [ 애니메이션 키프레임 만들기 ]
+  - 애니메이션 장면을 넣는 코드
+
+  1. 두 장면 키프레임
+  @keyframes 키프레임이름{
+    from{시작 css설정}
+    to{끝나는 css설정}
+  }
+
+  또는 
+  @keyframes 키프레임이름{
+    0%{시작 css설정}
+    100%{끝나는 css설정}
+  }
+
+  -> 만약 from설정이 초기설정과 같다면 from생략 가능
+
+  2. 여러장면 키프레임
+  @keyframes 키프레임이름{
+    0%{시작 css설정}
+    20%{중간 css설정}
+    40%{중간 css설정}
+    60%{중간 css설정}
+    80%{중간 css설정}
+    100%{끝나는 css설정}
+  }
+   1) 장면에 대한 시간 계산 하는 법
+    - 전체시간 * 설정된 %/ 100
+
+  2) 전체 애니메이션 시간은 언제 세팅?
+  -> 호출시에 세팅
+
+  [ 설정된 키프레임 호출하는 법 ]
+  animation: 이름 시간 가속도 지연 반복 방향 마지막상태)
+
+  1. 이름(animation-name) : 키프레임 이름
+  2. 시간(animation-duration) : 애니메이션 동작시간(초단위(s))
+  3. 가속도(animation-timing-function) : easeing
+  4. 지연시간(animation-delay) : 애니메이션 대기시간(s)
+  5. 반복(animation-iteration-count) : 애니메이션 반복(기본값 1로 한번 반복, 숫자를 쓰면 숫자만큼 반복, 무한반복은 infinite)
+  6. 뱡향(animation-direction) : 시작 -> 끝
+     - 한번이상 반복할 경우 반대경로로 애니메이션을 설정
+      -> alternate : 시작 -> 끝, 끝 -> 시작
+  7. 마지막 상태(animation-fill-mode) : 애니메이션이 끝났을 때 처음으로 돌아가는게 기본
+    -> forwards : 앞쪽 즉, 애니 끝장면에서 마무리
+    -> backwards(기본값) : 처음 장면에서 마무리
+    -> 유의사항 : infinite에서는 적용되지 않음
+************************************************/
+
+/* 내용보기 링크 타이틀 */
+.link{
+  position: absolute;
+  top: 100px;
+  right: 50px;
+}
+.opaAni{
+  opacity: 0;
+  animation: opaAni 1s forwards;
+}
+.opaAni.delay1{
+  animation-delay: 5s;
+}
+.opaAni.delay2{
+  animation-delay: 6s;
+}
+.opaAni.delay3{
+  animation-delay: 7s;
+}
+@keyframes opaAni{
+  10%{
+    opacity: 1;
+  }
+  30%{
+    opacity: 1;
+  }
+  60%{
+    opacity: 1;
+  }
+  80%{
+    opacity: .5;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.link a{
+  font: 50px 'Black Ops One';
+  color: lawngreen;
+  text-decoration: none;
+  text-shadow: 2px 2px 2px #000;
+}
+.link:hover a{
+  color: red;
+  text-decoration: overline;
+}
+
+.btnTop{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px outset #fff;
+  background-color: #ccc;
+  font: 25px/80px 'Black Ops One';
+  text-align: center;
+  text-decoration: none;
+}
+.btnTop:hover{
+  background-color: #ff0;
+  color: red;
+  border-style: inset;
+}
+
+.robx{
+  padding-top: 100px;
+  /* sticky 포지션을 위한 주의사항
+    overflow-x숨기기 세팅을 html과 동시에 적용하면 sticky가 작동하지 않음
+  */
+  overflow-X: hidden; /* 가로 스크롤바 숨김 */
+  /* height: 980px; */ /* 자식요소 #head의 repative포지션에서 top값을 %로 지정할 경우 부모박스의 크기가 정해져 있어야 %가 적용됨 */
+}
+
+/* 로봇머리 */
+#head{
+  position: relative;
+  left: 100%;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  background: url(../images/metal01.jpg) no-repeat center/cover;
+  border-radius: 40% 40% 30% 30%;
+}
+#head::before{
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: -25px;
+  width: 300px;
+  height: 350px;
+  background-color: cyan;
+  border-radius: 40% 40% 0 0;
+  z-index: -1;
+  box-shadow: 0 0 10px 5px cyan;
+}
+
+
+/* 머리, 몸 제자리로 돌아오는 애니 */
+.backAni.delay1{  /* .backAani에만 적용되는 .delay1이라는 뜻 */
+  animation-delay: 3s;
+}
+.backAni{
+  animation: backAni 1s ease-out 3s forwards;
+}
+@keyframes backAni {
+  to{
+    left: 0;
+  }
+}
+
+/* 눈 공통 */
+.eye{
+  position: absolute;
+  top: 50px;
+  width: 50px;
+  height: 50px;
+  border: 5px double #333;
+  border-radius: 50%;
+}
+#eye1{
+  left: 40px;
+  background: url(../images/e1.jpg) no-repeat 0/100% 100%;
+}
+#eye2{
+  right: 40px;
+  background: url(../images/e2.jpg) no-repeat 0/100% 100%;
+}
+#nose{
+  position: absolute;
+  top: 100px;
+  left: 40%;
+  width: 50px;
+  height: 70px;
+  background: url(../images/nose.jpg) no-repeat 0/100% 100%;
+}
+#mouth{
+  position: absolute;
+  bottom: 20px;
+  left: 30%;
+  width: 100px;
+  height: 50px;
+  background: url(../images/mouth.png) no-repeat 0/100% 100%;
+  animation: talkAni .3s linear 6s infinite alternate;
+}
+/* 입 움직이는 키프레임 */
+@keyframes talkAni {
+  to{
+    transform: scaleY(.8);
+  }
+}
+
+.ear{
+  position: absolute;
+  top: 35%;
+  width: 50px;
+  height: 80px;
+  box-shadow: 0 0 10px 5px cyan;
+}
+#ear1{
+  left: -50px;
+  background: url(../images/metal01.jpg) no-repeat 0/100% 100%;
+  border-radius: 50px 0 0 50px;
+}
+#ear2{
+  right: -50px;
+  background: url(../images/metal02.jpg) no-repeat 0/100% 100%;
+  border-radius: 0 50px 50px 0;
+}
+
+/* 몸 */
+#body{
+  position: relative;
+  top: 40px;
+  left: -100%;
+  width: 250px;
+  height: 280px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 600px;
+  background: url(../images/metal01.jpg) no-repeat 0/100% 100%;
+  box-shadow: 0 0 10px 5px cyan;
+}
+#body::after{
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  width: 250px;
+  height: 20px;
+  background-color: #333;
+}
+#neck{
+  position: absolute;
+  top: -90px;
+  left: 30%;
+  width: 80px;
+  height: 90px;
+  background: url(../images/metal02.jpg) no-repeat 0/100% 100%;
+}
+.arm{
+  position: absolute;
+  top: 50px;
+  width: 50px;
+  height: 240px;
+  background: url(../images/metal02.jpg) repeat-y 0/100%;
+  box-shadow: 0 0 10px 5px cyan;
+}
+#arm1{
+  left: -65px;
+}
+#arm2{
+  right: -65px;
+  transform-origin: top; /* 기준축 변경 */
+  animation: 
+    riseAni .6s ease-out 7s forwards,
+    shakeAni .4s ease-in-out 7.6s infinite alternate;
+}
+@keyframes riseAni {
+  to{
+      transform: rotate(-160deg);
+  }
+}
+@keyframes shakeAni {
+  from{
+      transform: rotate(-160deg);
+  }
+  to{
+      transform: rotate(-140deg);
+  }
+}
+
+/* 가상요소로 집게손 만들기 */
+.arm::before{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -75px;
+  left: -20px;
+  width: 80px;
+  height: 80px;
+  border: 3px solid #333;
+  border-radius: 50%;
+  background-color: #ccc;
+  box-shadow: 0 0 10px 5px cyan;
+}
+.arm::after{
+  content: '';
+  position: absolute;
+  bottom: -76px;
+  left: 14px;
+  width: 20px;
+  height: 50px;
+  background-color: #333;
+  border-radius: 10px;
+}
+.leg{
+  position: absolute;
+  top: 100%;
+  width: 70px;
+  height: 300px;
+  background: url(../images/metal02.jpg) repeat-y 0/100%;
+  box-shadow: 0 0 10px 5px cyan;
+}
+#leg1{
+  left: 0;
+}
+#leg2{
+  right: 0;
+}
+.leg::before{
+  content: '';
+  position: absolute;
+  bottom: -56px;
+  left: -17px;
+  width: 100px;
+  height: 60px;
+  border: 3px solid #555;
+  border-radius: 30% 30% 0 0;
+  background-color: #ccc;
+  box-shadow: 0 0 10px 5px cyan;
+}
+.leg::after{
+  content: '';
+  position: absolute;
+  bottom: -56px;
+  left: -17px;
+  width: 100px;
+  height: 10px;
+  border: 3px solid #333;
+  background-color: #333;
+}
+.sh{
+  position: absolute;
+  top: 0;
+  width: 80px;
+  height: 80px;
+  background: url(../images/metal01.jpg) no-repeat center/cover;
+  box-shadow: 0 0 10px 5px cyan;
+}
+#sh1{
+  left: -80px;
+  border-radius: 50px 0 0 50px;
+}
+#sh2{
+  right: -80px;
+  border-radius: 0 50px 50px 0;
+}
+#tv{
+  position: absolute; /* margin: 0 auto는 absolute와 fixed에는 적용되지 않음(붕 떠 있는 상태이기 때문 */
+  top: 65px;
+  left: 26px;
+  width: 200px;
+  height: 150px;
+  background: url(../images/tv.jpg) no-repeat 0/100% 100%;
+}
+#screen{
+  position: absolute;
+  top: 16px;
+  left: 10px;
+  width: 143px;
+  height: 108px;
+  background-color: #000;
+  border-radius: 15px;
+  overflow: hidden;
+}
+#screen iframe{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 100%;
+  border: none; 
+}
+#dcbx{
+  width: 800px;
+  margin: 0 auto;
+  border: 3px solid #fff;
+  border-radius: 20px;
+  padding: 15px 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  box-shadow: inset 0 0 25px blue,
+  inset 0 0 30px 20px cyan;
+}
+#dcbx h2{
+  /* sticky는 top값을 주면 보이는 화면의 위치를 체크하여 그 위치에 올 때 fixed처럼 화면에 고정 */
+  position: sticky;
+  top:0;
+  font-size: 35px;
+  text-align: center;
+  color: lime;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+}
+#dcbx small{
+  display: block;
+  text-align: center;
+  color: #ff0;
+  font-size: 12px;
+}
+#dcbx p{
+  font-size: 15px;
+  line-height: 1.8;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+
+/* 가독성을 위한 다단설정 */
+/* 다중열 개수 */
+column-count: 3; /* coc */
+column-rule: 5px dotted lightgreen; /* colr */
+column-gap: 55px;
+text-align: justify;
+/* 단어깨기 : 1byte문자인 영어는 기본적으로 단어단위로 같이 구분되어 있어 문단에서 단어가 못들어가면 아랫줄로 내려가서 중간이나 끝이 비어보여 단어깨기 설정을 해야 단어가 글자단위로 정렬됨*/
+word-break: break-all; /* wbb */
+text-indent: 10px; /* 들여쓰기 */
+}
+/* 가상요소로 첫글자 디자인 변경 */
+#dcbx p::first-letter{
+  font-size: 30px;
+  font-weight: bold;
+  color: lime;
+}
+
+/* 하단영역 */
+.info{
+  padding: 50px;
+  text-align: center;
+  color: #fff;
+  font: 30px 'Black Ops One', cursive;
+  text-shadow: 2px 2px 2px #000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.info span::before{
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 10px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background: pink url(../images/robot_03.png) no-repeat -7px top/50px;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Position - relative</title>
+  <style>
+    #r1{
+      position: relative;
+      /* 
+      2. relative
+      1) 위치이동속성이 적용된다.
+      2) 위치이동의 기준은 원래 있던 위치
+      3) 이동시에 다른요소에 영향없이 겹쳐질 수 있다.
+      4) 원래 있던 위치는 그대로 보존된다
+        (기존위치가 보존되기 때문에 이동시켜도 다른 요소가 그 자리를 차지하지 못함)   
+      5) 위치값 설정시 2가지 기준을오만 세팅한다
+        - 위, 아래 중 하나 
+        - 좌, 우 중 하나  
+        (top, left / top, right, bottom, left / bottom, right)
+      6) 마진은 그대로 적용된다
+      7) relative는 위치 이동값을 사용하지 않으면 static과 똑같은 특성을 가진다
+      8) relative는 겹쳐질 수 있으므로 위아래 관계가 성립한다.
+        (1) static보다 항상 위
+        (2) static 포지션이 아닌경우
+          - 나중에 그려진 요소가 위
+        (3) z-index 속성으로 숫자가 크면 위
+      9) 부모자격
+      -> 자식요소에 대한 다음의 중요한 특징이 있다.
+      자식요소(혹은 자손요소)의 포지션이 앱솔루트 일 때 자기자신에게 아무런 포지션이 없는 경우 부모역할을 하지 않는다 이 때 부모역할을 하려면 디자인이 그대로 유지되어야 하므로 relative를 줘서 부모자격을 부여한다 (부모자격은 static이 아닌 포지션들)
+        _______________________________________________________________________
+
+        [ z-index ]
+
+        - 겹쳐지는 포지션을 준 경우 위치순서를 정하여 디스플레이를 변경하는 속성
+        - z는 화면방향의 z축을 의미함
+        - 기본값은 0
+        유의사항: z-index 비교시에 형제레벨에서 먼저 비교하고 하위 자손요소에서 비교하기 때문에 남발할 경우 적용되지 않을 수 있기 때문에 꼭 필요할 때만 사용        
+
+      */
+      top: 50px;
+      left: 50px;
+      background: url(./ab_img/ab5.jpg) no-repeat center/cover;
+      color: #fff;
+    }
+    #r2{
+      position: relative;
+      bottom: 75px;
+      right: -86px;
+      z-index: -1; /* position이 있는 곳에서만 사용가능 */
+      background: url(./ab_img/ab4.jpg) no-repeat center/cover;
+      color: #fff;
+    }
+    #s2{
+      background-color: lightblue;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="bx"></div>
+  <div class="bx" id="r1">r1</div>
+  <div class="bx" id="s2">s2</div>
+  <div class="bx" id="r2">r2</div>
+  <div class="bx" id="s3">s3</div>
+  
+</body>
+</html>

@@ -16,7 +16,23 @@
     #cont{
         padding: 20px;
     }
-
+/* 메인 컨텐츠 공통 경계선 */
+    #cont article{
+        border-top: 1px solid #ccc;
+        margin-top: 25px;
+    }
+/* 메인 컨텐츠 아래 a요소 공통 */
+    /* a태그의 기본세팅을 변경 - 글자색, 밑줄 */
+    #cont a{
+        color: #222;
+        text-decoration: none;
+        font-size: 14px;
+        font-family: gulim;
+    }
+    #cont a:hover{
+        color: lightseagreen;
+        text-decoration: underline;
+    }
 /* 2-1. 언론사로고 */
 .prlogo img{
     height: 32px;
@@ -63,6 +79,13 @@
     /* 인용구 박스 */
     .quote{
         background-color: #ececec;
+        /* 배경색 옵션 속성
+            1. content-box: 컨텐트 영역에서만 배경색 넣기(border, padding 제외)
+            2. padding영역까지만 배경색 넣기(border 제외)
+            3. border-box(border영역까지 배경색 넣기(기본값))
+        */
+        background-clip: content-box; 
+
         padding: 10px;
     }
     .quote h3{
@@ -75,5 +98,34 @@
         text-align: justify;
         line-height: 1.7;
     }
-/* 2-5. 기자소개 */
+    /* 오늘의 작품 */
+    .twork{
+        text-align: center;
+        background-color: #fdffbf;
+        background-clip: content-box;
+        padding: 20px;
+    }
+    /* 오늘의 작품 이미지 */
+    .twork img{
+        width: 200px;
+    }
+    /* 포토뉴스 이미지 */
+    .pnews img{
+        /*
+        box-shadow: inset hoff voff blur spread #000;
+        box-shadow: 내부그림자 X축 Y축 경계흐림 확장 색상;
+         */
+        box-shadow: 2px 2px 5px #555;
+    }
+
+    /* 분야별 주요뉴스에 가상요소로 아이콘 넣기 */
+    .secnews dt::before{
+        content: '▣';
+        color: green;
+    }
+    .secnews dd::before{
+        content: '▶';
+        color: lightgreen;
+    }
+    /* 2-5. 기자소개 */
 /* 2-6. 원본기사링크 */
