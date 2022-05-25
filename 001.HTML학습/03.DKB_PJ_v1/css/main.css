@@ -26,10 +26,7 @@ body{
 
 /************* 2. 메인영역 **************/
 .cont{
-  padding-top: 40rem;
-  /* 기본height크기는 800px로 설정되어 있는 상태(컨텐츠영역 높이) :
-  height값을 800px로 유지하고 싶으면 height값을 400px로 변경해서 패딩+보더 값(400px)을 더해 800px을 맞추던가 box-sizing:border-box로 설정하여 보더와 패딩이 지정한 크기 내부에 포함되도록 한다. 
-  */
+  padding-top: 50vh;  /* 뷰포트 단위로 보이는 화면에서 50%위치로 밀어줌  */
   box-sizing: border-box; /* 기본값 */
   max-width: none; /* .inbox의 max-width 값 해제 */
 }
@@ -66,7 +63,9 @@ body{
   */
   float: left;
 }
-
+.ci{
+  transition: margin-top .4s ease-out;
+}
 .ci > img{
   width: 100%; /* 이미지 크기를 부모박스(.ci)에 맞추기 */
 }
@@ -80,23 +79,19 @@ body{
 .ci{
   transition: .4s;
 }
-/* 캐릭터박스(.cat)에 마우스 오버시 이미지박스(.ci) 위로 이동 */
 .cat:hover .ci{
   margin-top: -100px;
 }
-/* 이름 이미지 사이즈 조정 */
 .ci span img{
   width: 32%;
 }
 
 /* 이름이미지 중 첫번째 진한 이미지 숨기기 */
-/* 가상클래스로 첫번째 이미지 선택 */
 .ci span img:first-child{
   display: none;
 }
 
 /* 마우스 오버시 첫번째 이름이미지 보이게 하기 */
-/* 마우스 오버시 가상클래스 :hover */
 .cat:hover .ci span img:first-child{
   display: inline;
 }
@@ -113,23 +108,7 @@ body{
   margin-top: 15px;
   border-radius: 20px 5px 5px 20px;
   transition: height .4s ease-out;
-  /* height .5s ease-in-out 1s,
-  background-color 1s ease-in-out 1.4s; */
-  /* 트랜지션:
-    속성값의 변화과정을 보여주면서 애니메이션을 줌
-    transition: 속성 시간 속도 지연
-    1. 속성: 변경 애니메이션 대상 속성(속성을 안쓰면 기본값 all이 들어가 모두 적용됨)
-    2. 시간: 애니메이션 시간 - 초단위(s)
-    3. 가속도: 1) ease: 앞,뒤로 약간씩 느려짐(기본값)
-              2) ease-in: 애니 처음에 서서히 빨라짐
-              3) ease-out: 애니끝에 서서히 느려짐
-              4) ease-in-out: 애니 시작과 끝에 천천히
-              5) linear: 등속도 - 베이지곡선으로 매우 다채롭게 가속도 조정 가능
-    4. 지연: 애니 시작전 대기시간(초단위: s)   
-    5. 적용법: 오버시와 원상복귀되는 애니가 똑같다면 오버 전 원본에 한번만 주면 동일하게 적용됨. 만약 오버시와 아웃시가 달라야 한다면 각각 트랜지션을 설정       
-  */
 }
-/* 캐릭터 박스(.cat)에 마우스 오버시 설명박스(.cd) 보이기 */
 .cat:hover .cd{
   height: 250px;
 }

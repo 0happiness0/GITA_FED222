@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* 도깨비 인물관계도 css - cat.css */
+
+/* 공통사용 외부css 파일 합치기 */
+@import url(reset.css);
+@import url(core.css);
+@import url(common.css);
+
+#cont{
+  background-color: #dddddd;
+}
+.cont{
+  text-align: center;
+  min-width: none;height: auto;
+  padding: 0 !important;
+}
+.cont img{
+  max-width: 100%; /* 최대 100%는 부모가 자기 가로크기보다 작아지면 100%로 부모크기에 맞춘다 */
+}
