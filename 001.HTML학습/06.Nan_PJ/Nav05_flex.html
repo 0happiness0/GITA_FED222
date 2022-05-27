@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>유형5. 세로네비 서브별 드롭다운 사이드형 - flex적용</title>
+    <style>
+      html,
+      body,
+      ul,
+      ol {
+        margin: 0;
+        padding: 0;
+      }
+      ul,
+      ol {
+        list-style: none;
+      }
+      
+      h1{
+        text-align: center;
+      }
+
+      .wrap{
+        display: flex;
+      }
+
+      .gnb {
+        /* 사이드 메뉴 가로크기 지정 */
+        width: 200px;
+        background-color: #218cff;
+      }
+      .gnb ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+       .gnb > ul > li { 
+        position: relative; /* .smenu의 부모 */
+       }
+
+      .gnb > ul > li > a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 17px;
+        display: block;
+        width: 200px;
+        text-align: center;
+        line-height: 50px;
+        transition: all 0.3s;
+      }
+      .gnb > ul > li:hover > a {
+        background-color: #c3e3ff;
+        color: #000;
+      }
+
+      .smenu {
+        display: none;
+        position: absolute; 
+        top: 0;
+        left: 100%; /* 부모가로크 사이즈를 써줘도 가능함 200px */
+        width: 200px;
+        background-color: #c3e3ff;
+        transition: height 0.4s ease-out;
+      }
+      /* 마우스 오버시 보이기 */
+      .gnb > ul > li:hover .smenu{
+        display: block;
+      }
+
+      /* 서브메뉴 ol요소
+        - 안쪽 박스에 패딩을 준 이유는?
+        .smenu박스는 높이값을 0으로 자식요소
+        숨기기를 할 박스이므로 패딩이 있으면
+        높이값 0이어도 패딩때문에 숨겨지지 않는다!
+        따라서 안쪽박스에 패딩설정을 해야한다! */
+      .smenu ol {
+        /* 안쪽여백 */
+        padding: 10px;
+      }
+      .smenu a {
+        color: #000;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        line-height: 40px;
+        transition: 0.3s;
+      }
+      .smenu a:hover {
+        background-color: #ececec;
+        color: orangered;
+      }
+
+      /* 본문내용박스 - .wrap의 flex 자식요소 */
+      .cont {
+        width: 100%;
+        /* 일반적인 박스라면 앞의 .gnb박스의 200px이 더해져
+        가로스크롤이 생기지만 flex자식요소는 부모박스의
+        한계크기보다 강제로 크기를 줄여서 조절해 준다!
+        flex-shrink:1 
+        -> 기본설정(부모박스에 맞춰 줄어들래? 1 응, 0 아니) */
+        background-color: #fdfccf;
+        text-align: center;
+        line-height: 50;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>유형5. 세로네비 서브별 드롭다운 사이드형 - flex적용</h1>
+    <div class="wrap">
+      <nav class="gnb">
+        <ul>
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">웹개발</a>
+            <div class="smenu">
+              <ol>
+                <li>
+                  <a href="#">웹디자인</a>
+                </li>
+                <li>
+                  <a href="#">HTML5+CSS3</a>
+                </li>
+                <li>
+                  <a href="#">jQuery</a>
+                </li>
+                <li>
+                  <a href="#">웹+모바일</a>
+                </li>
+              </ol>
+            </div>
+          </li>
+          <li>
+            <a href="#">게시판</a>
+            <div class="smenu">
+              <ol>
+                <li>
+                  <a href="#">Q&amp;A</a>
+                </li>
+                <li>
+                  <a href="#">방명록</a>
+                </li>
+              </ol>
+            </div>
+          </li>
+          <li>
+            <a href="#">프로필</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="cont">본문내용</div>
+    </div>
+  </body>
+</html>

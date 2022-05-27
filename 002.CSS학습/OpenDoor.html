@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Door - CSS3 : 3D Perspective Animation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+    /* font-family: 'Comfortaa', cursive; */
+
+    html, body{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background-color: #9c0;
+    }
+    .tit{
+      font-family: 'Comfortaa', cursive;
+      font-size: 42px;
+      text-align: center;
+      color: #fff;
+      text-shadow: 2px 2px 2px #222;
+    }
+    .cont{
+      position: relative;
+      width: 200px;
+      height: 300px;
+      margin: 0 auto;
+      background-color: #900;
+    }
+
+    /* 문열었을 때 */
+    .frame{
+      position: relative;
+      top: 20px;
+      width: 150px;
+      height: 280px;
+      background: url(images/seashore.jpg) no-repeat center/auto 100%;
+      margin: 0 auto;
+
+      /* 
+        [ 3D 원근설정 ]
+        1. 셋팅위치: 3D원근 설정을 할 대상의 부모요소
+        2. 설정방법: perspective: 수차;
+          - 수치는 px단위로 숫자가 클수록 소실점이 먼것이므로 각도가 작아진다(기준점에서 소실점까지의 거리)
+      */
+      perspective: 480px;
+      /* perspective-origin: center; */
+      /* 
+      [ 뷰포인트(관찰지 위치) 변경 옵션 ]
+        perspective-origin: 가로축 세로축;
+          - 가로축: left, center, right, px, %
+          - 세로축: top, bottom, center, px, %
+          -> 두 값중 하나만 쓸 수 있고 복합일 경우 2가지를 같이 셋팅함
+      */
+    }
+    /* 문 */
+    .door{
+      width: 150px;
+      height: 280px;
+      background-color: #c90;
+      /* 문 열리는 애니메이션(Y축 회전)*/
+      transform: rotateY(0deg);
+      /* 회전축 변경 */
+      transform-origin: left; 
+      /* 
+      트랜스폼 회전축 변경속성:
+        transform-origin: 가로축 세로축;
+          - 가로축: left, center, right, px, %
+          - 세로축: top, bottom, center, px, %
+      */
+
+      animation: openFirst 1s ease-in-out forwards;
+      animation: openDoor 2s ease-in-out 1s infinite alternate; /* openFirst에서 1s동안 움직이므로 opendoor에서 1s 대기 */
+
+      /* 애니메이션 상태관리 */
+      animation-play-state: paused;
+      /* paused - 멈춤상태,  running - 진행상태 */
+    }
+
+    /* 오버시 애니메이션 작동 */
+    .cont:hover .door{
+      animation-play-state: running;
+    }
+
+    /* 문 처음 여는 키프레임 */
+    @keyframes openFirst {
+      to{
+        transform: rotateY(60deg);
+      }
+    }
+    /* 문 여닫는 키프레임 */
+    @keyframes openDoor {
+      0%{
+        transform: rotateY(60deg);
+      }
+      100%{
+        transform: rotateY(-60deg);
+      }
+    }
+
+    .handle{
+      position: absolute;
+      top: 140px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      background-color: blue;
+      border-radius: 50%;
+    }
+
+  </style>
+</head>
+<body>
+  <h1 class="tit">Open Door</h1>
+
+  <div class="cont">
+    <!-- 문 열었을 때 뚫린 부분 -->
+    <div class="frame">
+      <div class="door">
+        <div class="handle"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

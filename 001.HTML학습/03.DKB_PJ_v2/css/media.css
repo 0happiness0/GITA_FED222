@@ -68,10 +68,10 @@
   }
   .ham{
     display: block;
+    z-index: 1; /* 로고보다 위 */
   }
   /* 햄버거 버튼 변경(전체메뉴 보일때만(.top.on일 때만) */
   .top.on .ham{
-    z-index: 1; /* 로고보다 위 */
     color: #fff;
     transform: scale(1.5);
   }

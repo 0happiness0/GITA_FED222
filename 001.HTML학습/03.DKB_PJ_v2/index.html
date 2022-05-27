@@ -8,6 +8,9 @@
   <title>쓸쓸하고 찬란한신(神) 도깨비</title>
   <link rel="stylesheet" href="css/main.css"> <!-- 외부css 하나만 불러도 main.css에서 immport하고 있는 3개의 css들이 같이 들어옴 -->
   <link rel="stylesheet" href="css/media.css"><!-- **미디어쿼리 css 외부파일은 반드시 기존 css파일 아래쪽에 위치해야 덮어씀** -->
+
+  <!-- 공통 외부 JS -->
+  <script src="js/common.js"></script>
 </head>
 
 <body class="scbar">
@@ -106,7 +109,7 @@
         </ul>
       </nav>
       <!-- 모바일용 햄버거버튼 -->
-      <button class="ham"></button>
+      <button class="ham" onclick="showGNB()"></button>
     </header>
   </div>
   <!-- 2. 메인영역 -->
