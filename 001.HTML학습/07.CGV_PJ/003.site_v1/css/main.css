@@ -21,20 +21,91 @@ body *{
 }
 
 /******************** 1. 상단영역 ********************/
-.top{
+.top{ /* 크기를 줄 때 겉박스(#top) 보다 안쪽박스(.top)에 주는게 좋음 */
     height: 80px;
     background: url(../images/curtain.jpg) repeat-x;
+}
+
+h1.tit{
+    font-family: 'Jua', sans-serif;
+    color: aquamarine;
+    font-size: 40px;
+    line-height: 80px;
+    text-align: center;
+
+    /* 그림자를 이용한 glow효과 */
+    text-shadow: 0 0 12px aquamarine;
 }
 
 
 
 /******************** 2. 메인영역 ********************/
 .cont{
+    position: relative;
     height: 788px;
     background: url(../images/bg.jpg) no-repeat;
 }
 
+/* 스크린박스 */
+#screen{
+    position: absolute; /* 부모는 .cont */
+    top: 136px;
+    left: 257px;
+    width: 701px;
+    height: 397px;
+    background-color: #000;
+}
 
+#screen iframe{
+    width: 100%;
+    height: 100%;
+    border: none; /* 아이프레임 기본보더 없앰 */
+}
+/* 예고편 선택 메뉴*/
+.mlist{
+    position: absolute; /* 부모는 .cont */
+    bottom: 58px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden; /* .movtxt의 부모자격에서만 숨기기 사용가능 */
+}
+.mlist ul{
+    display: flex;
+}
+/* 각 li리스트 */
+.mlist ul > li{
+    margin: 0 9px;
+}
+.mlist img{
+    width: 99px; /* 강제로 사이즈 맞추기 */
+    height: 140px;
+}
+/* 영화정보 박스 */
+.movetxt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 100%; /* 부모사이즈 만큼 아래로 밀기 */
+    width: 99px;
+    height: 140px;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Cute Font', cursive;
+    font-size: 14px;
+    word-spacing: nowrap;
+    line-height: 2;
+    text-align: center;
+    transition: top .3s ease-out;
+}
+/* li오버시 영화정보 올라오기 */
+.mlist ul > li:hover .movetxt{
+    top: 0;
+}
+.movetxt > li:first-child{
+    color: aqua;
+    font-size: 17px;
+    letter-spacing: -1px;
+}
 
 /******************** 3. 하단영역 ********************/
 .info{

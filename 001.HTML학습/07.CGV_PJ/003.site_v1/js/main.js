@@ -1,20 +1,16 @@
 // CGV 메인 페이지 JS - main.js
+/* 
+  함수명: chgMV
+  기능 : 영화 예고편 선택하여 플레이
+*/
+function chgMV(vid){  /* vid는 동영상 아이디 */
+  // 1. 함수호출확인 + 전달값 확인
+  console.log("바꿔",vid);
 
-/*************************************** 
-    함수명: chgMV
-    기능: 영화예고편을 변경함
-***************************************/
-function chgMV(mvid){ // mvid - 영화아이디값 전달변수
+  // 2. 변경대상: #screen iframe
+  var tg = document.querySelector("#screen iframe");
 
-    // 1. 함수호출 확인!
-    console.log("나야나!", mvid);
-
-    // 2. 대상선정: #screen iframe
-    var tg = document.querySelector("#screen iframe");
-
-    // 3. 변경내용: 대상의 src속성 변경하기
-    // src중 영화 아이디부분을 변경함!
-    tg.src = `https://www.youtube.com/embed/${mvid}?autoplay=1&playsinline=1`;
-
-
-} ////////// chgMV 함수 ////////////////////
+  // 3. 변경내용: src속성 재설정
+  // 선택요소.src = 변경할 값;
+  tg.src= `https://www.youtube.com/embed/${vid}?autoplay=1&loop=1&playlist=${vid}&playsinline=1`;
+}

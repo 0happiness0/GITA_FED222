@@ -74,9 +74,7 @@ body::after{
     위치로 밀어주기로 설정변경함!    
     */
     box-sizing: border-box;
-    /* .inbox 최대가로크기 해제! */
-    max-width: none;
-   
+    max-width: none; /* .inbox 최대가로크기 해제! */
     overflow: hidden;/* overflow: hidden도 absolute 자식의 부모자격박스에 적용됨 안쓰면 가로 스크롤바가 생김*/
 }
 
@@ -104,8 +102,6 @@ body::after{
     top: -150vh;
     
     width: 24%; /* 4등분 가로크기는 25%지만 마진때문에 25% - 양쪽마진합(1%) = 24%로 줌*/
-
-    /* 이미지 간격을 위해 양쪽 마진을 %값으로 셋팅 */
     margin: 0 .5%;
     /* 양쪽마진 한쪽씩 0.5% 
     그런데 코딩시 앞에 0은 생략가능! */

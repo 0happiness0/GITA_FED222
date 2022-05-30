@@ -33,3 +33,10 @@ h1,h2,h3,h4,h5,h6{
     font-size: 100%;
     /* html의 기본글자크기(16px)와 일치 초기화 */
 }
+
+/* 5. 록박스 이미지 하단공백 제거 */
+img{
+    vertical-align: middle;
+    /* 링크시 테두리제거(파란색 기본보더) */
+    border: none;
+}

@@ -128,8 +128,8 @@ a{
 }
 /* 메인영역 */
 .cont{
-  /* 이미지 가로를 꽉 채울려면? */
-  width: 100vw;
+  width: 100%;
+  max-width: none;  /* .inbox에 max-width:128rem을 줘서 이미지가 더 이상 커지지 않기 때문에 none을 줘야 화면에 꽉참 */
   height: 70rem;
   background: url(../images/bg_main_toparea.png) no-repeat;
 }
@@ -163,6 +163,15 @@ a{
 }
 
 /* 캐릭터박스 */
+.coin_box {
+  position: absolute;
+  bottom: 0;
+  left: 11rem;
+  max-width: 128rem;
+  margin: 0 auto;
+  white-space: nowrap;
+  z-index: 11;
+}
 .cbx{
   display: flex;
   justify-content: center;
@@ -225,33 +234,33 @@ a{
 }
 /* 코인이미지 */
 .coin_box{
-  position: relative;
-  top: 4rem;
-  left: 11rem;
+  position: absolute;
+  bottom: -4rem;
+  left: 25rem;
   max-width: 128rem;
   margin: 0 auto;
   white-space: nowrap;
   z-index: 11;
 }
 .coin_box img{
-  max-width: 25rem;
-  opacity: .5;
+  width: 22rem;
+  opacity: .3;
   margin-right: -6rem;
-  transition: .3s;
 }
 .coin_box img:hover{
   transform: scale(1.3);
   opacity: 1;
 }
 .coin_shadow{
-  position: relative;
-  top: -29rem;
-  left: 22rem;
-  display: inline;
+  position: absolute;
+  bottom: -3.5rem;
+  left: 25rem;
+  white-space: nowrap;
 }
 .coin_shadow img{
-  max-width: 25rem;
-  margin-right: -6rem;  
+  max-width: 22rem;
+  margin-right: -6rem;
+  
 }
 /* 배너 */
 .banner{
@@ -312,7 +321,7 @@ address{
   font-size: 1.1rem;
   line-height: 1.8;
   border-bottom: 1px solid #c14654;
-  /* .gbox에 패딩을 줘서 boder-bottom 선이 앞 뒤로 끊기는 해결방법은? */
+  /* .gbox li에 패딩을 줘서 boder-bottom 선이 앞 뒤로 끊기는데 안끊기고 처음부터 끝까지 선을 주는방법은? */
 }
 .gbox li:last-child{
   border-bottom: none;
